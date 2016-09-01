@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/reloader'
 require 'sinatra/flash'
+require 'json'
 
 enable :sessions
 
@@ -24,5 +25,5 @@ get '/' do
 end
 
 post '/' do
-  
+  logger.info params.inspect
 end
