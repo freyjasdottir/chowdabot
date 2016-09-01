@@ -26,4 +26,9 @@ end
 
 post '/' do
   logger.info params.inspect
+  response = json({
+    "response_type": "in_channel",
+    "text": "Chowdabot recieved a request"
+  })
+  return response
 end
