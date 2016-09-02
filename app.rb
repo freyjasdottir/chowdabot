@@ -25,9 +25,5 @@ get '/' do
 end
 
 post '/' do
-  response = {
-    "response_type": "in_channel",
-    "text": "Chowdabot recieved a request"
-  }
-  return response
+  "@channel I'm returning something!"
 end
