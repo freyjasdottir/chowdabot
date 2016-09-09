@@ -25,5 +25,11 @@ get '/' do
 end
 
 post '/' do
-  "@channel I'm returning something!"
+  content_type :json
+  puts params
+  {
+    "response_type": "in_channel",
+    "text": "<!channel> " + params['text'],
+    "channel": "#random"
+  }.to_json
 end
