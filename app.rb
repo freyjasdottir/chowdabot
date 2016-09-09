@@ -26,10 +26,8 @@ end
 
 post '/' do
   content_type :json
-  puts params
   {
     "response_type": "in_channel",
-    "text": "<!channel> " + params['text'],
-    "channel": "#random"
+    "text": "<!channel> " + params['text']
   }.to_json
 end
