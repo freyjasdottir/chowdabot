@@ -7,7 +7,7 @@ gem "sinatra", "~> 1.4"
 gem "sinatra-activerecord", "~> 2.0"
 gem "sinatra-contrib"
 gem "sinatra-flash"
-gem "httpary"
+gem "httparty"
 
 group :test, :development do
   gem "pry"
