@@ -28,6 +28,8 @@ GEM
     coderay (1.1.1)
     database_cleaner (1.5.3)
     diff-lcs (1.2.5)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     method_source (0.8.2)
@@ -37,6 +39,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    multi_xml (0.5.5)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -100,6 +103,7 @@ DEPENDENCIES
   activerecord (~> 4.1)
   capybara
   database_cleaner
+  httparty
   pg
   pry
   rake
