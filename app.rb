@@ -20,6 +20,7 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
 end
 
 get '/' do
+  HTTP.postback('something')
   @title = "Hello World"
   erb :index
 end
