@@ -19,13 +19,16 @@ Dir[File.join(File.dirname(__FILE__), 'app', '**', '*.rb')].each do |file|
   also_reload file
 end
 
+InvalidTokenError = Class.new(Exception)
+
 get '/' do
-  HTTP.postback('something')
   @title = "Hello World"
   erb :index
 end
 
 post '/' do
+  raise(InvalidTokenError) unless params[:token] == ENV['SLACK_TOKEN']
+
   content_type :json
   {
     "response_type": "in_channel",
