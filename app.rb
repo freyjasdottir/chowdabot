@@ -47,7 +47,7 @@ get '/' do
 end
 
 post '/' do
-  if params[:token] == ENV['SLACK_APP_CLIENT_SECRET']
+  if params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN']
     adminize_message(params['text'])
     status 200
   else
