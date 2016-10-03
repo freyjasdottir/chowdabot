@@ -28,7 +28,7 @@ InvalidTokenError = Class.new(Exception)
 def adminize_message(msg)
   message = {
     "username": "chowdabot",
-    "channel": "#general",
+    "channel": "#botdev-test",
     "text": "<!channel> " + msg
   }.to_json
 
@@ -47,8 +47,7 @@ get '/' do
 end
 
 post '/' do
-  if params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_DEV']
-    || params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_PROD']
+  if params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_DEV'] || params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_PROD']
     adminize_message(params['text'])
     status 200
   else
