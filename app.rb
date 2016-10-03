@@ -29,20 +29,20 @@ ENV['SLACK_CONFIGS'].split(' ').each do |config|
   auth_token = ENV['SLASH_COMMAND_AUTH_TOKEN_' + config]
   incoming_webhook = ENV['INCOMING_WEBHOOK_URL_' + config]
   channel = ENV['CHANNEL_' + config]
-  env_configs[auth_token] = {webhook: incoming_webhook, channel: channel} 
+  env_configs[auth_token] = {webhook: incoming_webhook, channel: channel}
 end
 
 InvalidTokenError = Class.new(Exception)
 
-def adminize_message(msg)
+def adminize_message(webhook, channel, msg)
   message = {
     "username": "chowdabot",
-    "channel": "#botdev-test",
+    "channel": channel,
     "text": "<!channel> " + msg
   }.to_json
 
   HTTParty.post(
-    ENV['INCOMING_WEBHOOK_URL'],
+    webhook,
     :body => message,
     :headers => {
       'Content-type' => 'application/json'
@@ -56,8 +56,9 @@ get '/' do
 end
 
 post '/' do
-  if params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_DEV'] || params[:token] == ENV['SLASH_COMMAND_AUTH_TOKEN_PROD']
-    adminize_message(params['text'])
+  if env_configs.has_key?(params[:token])
+    config = env_configs[params[:token]]
+    adminize_message(config[:webhook], config[:channel], params['text'])
     status 200
   else
     raise InvalidTokenError
