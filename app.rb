@@ -23,6 +23,15 @@ end
 
 Dotenv.load
 
+env_configs = {}
+
+ENV['SLACK_CONFIGS'].split(' ').each do |config|
+  auth_token = ENV['SLASH_COMMAND_AUTH_TOKEN_' + config]
+  incoming_webhook = ENV['INCOMING_WEBHOOK_URL_' + config]
+  channel = ENV['CHANNEL_' + config]
+  env_configs[auth_token] = {webhook: incoming_webhook, channel: channel} 
+end
+
 InvalidTokenError = Class.new(Exception)
 
 def adminize_message(msg)
