@@ -38,7 +38,8 @@ def adminize_message(webhook, channel, msg)
   message = {
     "username": "chowdabot",
     "channel": channel,
-    "text": "<!channel> " + msg
+    "text": "<!channel> " + msg,
+    "link_names": 1
   }.to_json
 
   HTTParty.post(
