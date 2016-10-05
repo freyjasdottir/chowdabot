@@ -34,11 +34,11 @@ end
 
 InvalidTokenError = Class.new(Exception)
 
-def adminize_message(webhook, channel, user, msg)
+def adminize_message(msg)
   message = {
     "username": "chowdabot",
-    "channel": channel,
-    "text": "<!channel> " + "@#{user} says: " + msg,
+    "channel": msg[:channel],
+    "text": "<!channel> " + "@#{msg[:user]} says: " + msg[:text],
     "link_names": 1
   }.to_json
 
@@ -59,11 +59,12 @@ end
 post '/' do
   if env_configs.has_key?(params[:token])
     config = env_configs[params[:token]]
-    adminize_message(
-      config[:webhook],
-      config[:channel],
-      params[:user_name],
-      params['text'])
+    message = { webhook: config[:webhook],
+                channel: config[:channel],
+                user: params[:user_name]
+                text: params['text']
+              }
+    adminize_message(message)
     status 200
   else
     raise InvalidTokenError
